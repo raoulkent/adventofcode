@@ -1,17 +1,20 @@
 import pandas as pd
-import numpy as np
 from itertools import cycle
 
 
 df = pd.read_csv('input', sep="\n", names=['freq'])
 freq = df['freq'].values
 
-# Part 1
+"""
+--- Part One ---
+"""
 print('The frequency sum is:')
 print(df["freq"].sum())
 
 
-# Part 2
+"""
+--- Part Two ---
+"""
 def find_first_repeated_freq(freq_mods):
     s = set()
     current_freq = 0
