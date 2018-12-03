@@ -23,19 +23,28 @@ print(checksum)
 
 # --- Part Two ---
 def part2(id_list):
-    for id_ in id_list:
-        id_list.remove(id_)
+    for _id in id_list:
+        id_list.remove(_id)
         for compared_id in id_list:
-            zipped_list = zip(id_, compared_id)
+            zipped_list = zip(_id, compared_id)
             number_of_same_chars = 0
             for tuple_ in zipped_list:
                 if tuple_[0] == tuple_[1]:
                     number_of_same_chars += 1
                 if number_of_same_chars == compared_id.__len__()-1:
-                    matcher = SequenceMatcher(None, id_, compared_id)
-                    blocks = matcher.get_matching_blocks()
-                    string_ = ''.join([id_[a:a+n] for a, _, n in blocks])
-                    return string_
+                    return strip_differing_chars(_id, compared_id)
+
+
+def hamming_distance(s1, s2):
+    assert len(s1) == len(s2)
+    return sum(ch1 != ch2 for ch1, ch2 in zip(s1, s2))
+
+
+def strip_differing_chars(_str1, _str2):
+    matcher = SequenceMatcher(None, _str1, _str2)
+    blocks = matcher.get_matching_blocks()
+    _str = ''.join([_str2[a:a + n] for a, _, n in blocks])
+    return _str
 
 
 print(part2(id_list))
